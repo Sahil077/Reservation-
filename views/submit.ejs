@@ -1,0 +1,130 @@
+<%- include('partials/header') %>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Delicon </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+      <a class="nav-link" href="/reservation" role="button">New Reservation</a>
+     </li>
+    <li class="nav-item">
+    <a class="nav-link" href="/logout" role="button">Log Out</a>
+    </li>
+    
+    </ul>
+  </div>
+</nav>
+
+
+
+<% items.forEach(function(item){ %>  
+<div class="container">
+  <form action="/submit" method="post">
+    <div class="form-group">
+      <span class="form-label">Destination</span>
+      <input class="form-control" type="text" name="Destination" value="<%= item.Destination %>" placeholder="Country, ZIP, city...">
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <span class="form-label">Check In</span>
+          <input class="form-control" type="date" name="Check_In" value="<%= item.Check_In %>" required>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <span class="form-label">Check out</span>
+          <input class="form-control" type="date" name="Check_out" value="<%= item.Check_out %>" required>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <span class="form-label">Rooms</span>
+          <select class="form-control" name="rooms"  required>
+            <option value="<%= item.Check_In %>" selected hidden>no of rooms</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+          <span class="select-arrow"></span>
+         
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <span class="form-label">Adults</span>
+          <select class="form-control" name="Adults"  required>
+            <option value="<%= item.Adults %>" selected hidden>no of adults</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+          <span class="select-arrow"></span>
+          
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <span class="form-label">Children</span>
+          <select class="form-control" name="Children"  required>
+            <option value="<%= item.Children %>" selected hidden>no of children</option>
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+          </select>
+          <span class="select-arrow"></span>
+         
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <span class="form-label">Email</span>
+          <input class="form-control" type="email" name="EmailId" value="<%= item.EmailId %>" placeholder="Enter your Email">
+          
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <span class="form-label">Phone</span>
+          <input class="form-control" type="tel" name="Phone_On" value="<%= item.Phone_On %>" placeholder="Enter you Phone">
+          
+        </div>
+      </div>
+    </div>
+    <div class="form-btn">
+      <button class="submit-btn btn-primary">Update</button>
+    </div>
+  </form>
+</div>
+
+ <%}); %>
+
+
+<script>
+  $('.form-control').each(function () {
+    floatedLabel($(this));
+  });
+
+  $('.form-control').on('input', function () {
+    floatedLabel($(this));
+  });
+
+  function floatedLabel(input) {
+    var $field = input.closest('.form-group');
+    if (input.val()) {
+      $field.addClass('input-not-empty');
+    } else {
+      $field.removeClass('input-not-empty');
+    }
+  }
+</script>
+
+<%- include('partials/footer') %>
